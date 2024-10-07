@@ -5,6 +5,7 @@ import { Backend } from "./backend";
 export interface InfraStackProps extends StackProps {
   readonly rootDomainName: string;
   readonly apiDomainPrefix: string;
+  readonly hostedZoneId: string;
 }
 
 export class InfraStack extends Stack {
@@ -14,9 +15,10 @@ export class InfraStack extends Stack {
   constructor(scope: Construct, id: string, props: InfraStackProps) {
     super(scope, id, props);
 
-    const backend = new Backend(this, `${id}Backend`, {
+    const backend = new Backend(this, `${id}-Backend`, {
       rootDomainName: props.rootDomainName,
       apiDomainPrefix: props.apiDomainPrefix,
+      hostedZoneId: props.hostedZoneId,
       containerProps: [{
         containerName: "exampleapi",
         containerPath: "services",
@@ -37,7 +39,6 @@ export class InfraStack extends Stack {
         }]
     });
 
-    this.clusterName = backend.clusterName;
     this.serviceArn = backend.serviceArn;
   }
 }
