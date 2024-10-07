@@ -1,8 +1,8 @@
 {
-  "name": "cdk-webapp1",
+  "name": "cdk-webapp",
   "version": "0.1.0",
   "bin": {
-    "cdk-webapp1": "bin/cdk-webapp1.js"
+    "cdk-webapp1": "bin/webapp.js"
   },
   "scripts": {
     "build": "tsc",
